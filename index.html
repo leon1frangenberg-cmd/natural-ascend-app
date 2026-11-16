@@ -1,0 +1,1696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#fffbf5" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="apple-mobile-web-app-title" content="Natural Ascend" />
+<title>Natural Ascend · Jacked German</title>
+<style>
+@font-face { font-family: "Inter"; src: url("fonts/Inter-VariableFont_opsz,wght.ttf") format("truetype"); font-weight: 100 900; font-style: normal; font-display: block; }
+@font-face { font-family: "Outfit"; src: url("fonts/Outfit-VariableFont_wght.ttf") format("truetype"); font-weight: 100 900; font-style: normal; font-display: block; }
+
+@font-face { font-family: "Newsreader"; src: url("fonts/Newsreader-VariableFont_opsz,wght.ttf") format("truetype"); font-weight: 200 800; font-style: normal; font-display: block; }
+@font-face { font-family: "Newsreader"; src: url("fonts/Newsreader-Italic-VariableFont_opsz,wght.ttf") format("truetype"); font-weight: 200 800; font-style: italic; font-display: block; }
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body {
+  background: #f4f1eb;
+  font-family: Outfit, Inter, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+body { min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 28px 16px 48px; }
+
+.phone-wrap { display: inline-block; margin: 0 0 72px 0; position: relative; padding: 36px; }
+
+.phone {
+  position: relative;
+  width: 414px;
+  height: 868px;
+  background: linear-gradient(160deg, #f2f0ec 0%, #cfcbc4 16%, #8f8c87 48%, #d8d4ce 100%);
+  border-radius: 62px;
+  padding: 12px;
+  box-shadow:
+    inset 0 0 0 1.4px rgba(255,255,255,0.7),
+    inset 0 0 0 3px #2a2a28,
+    inset 0 0 0 4.5px #111,
+    0 28px 60px rgba(40,36,30,0.22);
+}
+.phone-btn { position: absolute; background: linear-gradient(90deg, #bbb8b2, #8a8782 40%, #d0cdc8); z-index: 2; }
+.btn-silent { left: -3px; top: 148px; width: 3px; height: 28px; border-radius: 2px 0 0 2px; }
+.btn-vol-up { left: -3px; top: 198px; width: 3px; height: 52px; border-radius: 2px 0 0 2px; }
+.btn-vol-down { left: -3px; top: 258px; width: 3px; height: 52px; border-radius: 2px 0 0 2px; }
+.btn-power { right: -3px; top: 220px; width: 3px; height: 82px; border-radius: 0 2px 2px 0; }
+
+.screen {
+  width: 390px;
+  height: 844px;
+  border-radius: 50px;
+  overflow: hidden;
+  position: relative;
+  color: #1c160e;
+  background: #fffbf5;
+}
+
+.dynamic-island {
+  position: absolute;
+  top: 11px; left: 50%;
+  transform: translateX(-50%);
+  width: 124px; height: 36px;
+  background: #000;
+  border-radius: 20px;
+  z-index: 40;
+  box-shadow: 0 0 0 2px #000;
+}
+.dynamic-island .cam {
+  position: absolute;
+  right: 18px; top: 50%;
+  transform: translateY(-50%);
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: #0b1520;
+  box-shadow: inset 0 0 0 2px #0e1a28, inset 3px 2px 3px #1a3a5a;
+}
+
+.status-bar {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 54px;
+  z-index: 30;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 0 28px 8px 28px;
+  pointer-events: none;
+  color: #1c160e;
+}
+.sb-time {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+  width: 50px;
+  font-family: Inter, sans-serif;
+}
+.sb-icons { display: flex; align-items: center; gap: 6px; }
+.sb-icons svg { display: block; }
+
+.app {
+  height: 844px;
+  display: flex;
+  flex-direction: column;
+  padding-top: 54px;
+  position: relative;
+  background: #fffbf5;
+  color: #1c160e;
+  --ink: #1c160e;
+  --muted: #8a8580;
+  font-family: Outfit, Inter, sans-serif;
+}
+
+.icon-btn {
+  width: 32px; height: 32px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  color: inherit;
+}
+.icon-btn.right { width: 28px; }
+.header-actions { display: flex; align-items: center; gap: 2px; flex-shrink: 0; }
+.actions-left { flex-shrink: 0; }
+
+.header {
+  height: 66px;
+  display: flex;
+  align-items: center;
+  padding: 2px 10px 0;
+  flex-shrink: 0;
+  background: #fffbf5;
+}
+.header .wm {
+  flex: 1;
+  height: 36px;
+  background: url("img/wordmark-black-tight.png") left center / contain no-repeat;
+  margin-left: 4px;
+}
+
+.tabs {
+  height: 40px;
+  display: flex;
+  align-items: stretch;
+  padding: 0 8px;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 2;
+  background: #fffbf5;
+  border-bottom: 1px solid #e8e4de;
+}
+.tab {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13.5px;
+  font-weight: 550;
+  color: var(--muted, #8a8580);
+  position: relative;
+  letter-spacing: -0.15px;
+  font-family: Outfit, Inter, sans-serif;
+}
+.tab.on { color: var(--ink, #1c160e); font-weight: 600; }
+.tab.on::after {
+  content: "";
+  position: absolute;
+  left: 8px; right: 8px; bottom: -1px;
+  height: 1.5px;
+  background: #1c160e;
+  border-radius: 0;
+}
+
+.content { flex: 1; overflow: hidden; position: relative; background: #fffbf5; }
+.content-scroll { padding: 10px 16px 6px; height: 100%; }
+
+.card { margin-bottom: 8px; }
+.cover {
+  height: 160px;
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 8px 20px rgba(40,36,30,0.10);
+}
+
+.cover.cafe { background-image: url("img/card-start.jpg"); background-position: center; }
+.cover.meal { background-image: url("img/card-tracker.jpg"); background-position: center; }
+.cover.setup { background-image: url("img/card-calls.jpg"); background-position: center; }
+.cover.community { background-image: url("img/card-community.jpg"); background-position: center; }
+
+.cover .scrim {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.0) 50%, rgba(20,12,4,0.52) 100%);
+}
+.cover.meal .scrim {
+  background: linear-gradient(180deg, rgba(0,0,0,0.0) 40%, rgba(20,12,4,0.52) 100%);
+}
+.cover.cafe .scrim {
+  background: linear-gradient(180deg, rgba(0,0,0,0.0) 52%, rgba(20,12,4,0.50) 100%);
+}
+.cover.community .scrim {
+  background: linear-gradient(180deg, rgba(0,0,0,0.0) 68%, rgba(20,12,4,0.42) 100%);
+}
+
+/* Locked cards: dim + slight desaturate; type stays above the veil */
+.card.locked .cover .scrim {
+  background: linear-gradient(180deg, rgba(16,14,12,0.22) 28%, rgba(10,9,8,0.62) 100%);
+  -webkit-backdrop-filter: grayscale(48%) brightness(0.70);
+  backdrop-filter: grayscale(48%) brightness(0.70);
+  z-index: 1;
+}
+
+.cover .sp {
+  position: absolute;
+  right: 10px; top: 10px;
+  width: 36px; height: 28px;
+  background: url("img/sprinter-white.png") center / contain no-repeat;
+  opacity: 0.9;
+  filter: drop-shadow(0 1px 4px rgba(0,0,0,0.35));
+  z-index: 2;
+}
+.cover-title {
+  position: absolute;
+  left: 14px; bottom: 12px;
+  font-family: Newsreader, serif;
+  font-size: 28px;
+  font-weight: 500;
+  font-style: italic;
+  font-optical-sizing: auto;
+  letter-spacing: -0.4px;
+  line-height: 1;
+  color: #fff;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.35);
+  z-index: 2;
+}
+.cover-tag {
+  position: absolute;
+  left: 14px; top: 12px;
+  font-size: 10px;
+  font-weight: 650;
+  letter-spacing: 1.1px;
+  text-transform: uppercase;
+  color: #fff;
+  background: rgba(255,255,255,0.18);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 3px 8px;
+  border-radius: 100px;
+  z-index: 2;
+  font-family: Outfit, Inter, sans-serif;
+}
+
+.prog { margin-top: 8px; display: flex; align-items: center; gap: 8px; min-height: 12px; }
+.bar {
+  flex: 1;
+  height: 1px;
+  background: #b8b2a8;
+  border-radius: 0;
+  overflow: visible;
+}
+.bar > i { display: block; height: 1px; width: 100%; background: #1c160e; border-radius: 0; }
+.prog-lab { font-size: 11px; color: #1c160e; font-weight: 650; white-space: nowrap; font-family: Outfit, Inter, sans-serif; }
+.prog.locked { opacity: 1; }
+.prog.locked .prog-lab { display: none; }
+.prog.locked .bar { background: #b8b2a8; }
+
+.lock-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  margin-top: 8px;
+  font-size: 11.5px; font-weight: 650;
+  color: #f4f1ec;
+  background: #2a2724;
+  padding: 5px 10px;
+  border-radius: 100px;
+  font-family: Outfit, Inter, sans-serif;
+}
+.cover .lock-pill {
+  position: absolute;
+  left: 14px;
+  bottom: 10px;
+  margin-top: 0;
+  z-index: 3;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.28);
+}
+.card.locked .cover-title { bottom: 42px; }
+
+.tabbar {
+  height: 74px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-around;
+  padding: 6px 8px 0;
+  position: relative;
+  z-index: 5;
+  background: #fffbf5;
+  border-top: 1px solid #e8e4de;
+}
+.tabbar-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  color: var(--muted, #8a8580);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: -0.1px;
+  font-family: Inter, sans-serif;
+}
+.tabbar-item.on { color: var(--ink, #1c160e); }
+.home-ind {
+  position: absolute;
+  left: 50%;
+  bottom: 8px;
+  transform: translateX(-50%);
+  width: 134px;
+  height: 5px;
+  background: var(--ink, #1c160e);
+  opacity: 0.85;
+  border-radius: 100px;
+}
+
+/* 3-card first screen */
+.s8t .header { height: 64px; }
+.s8t .tabs { height: 40px; }
+.s8t .tabbar { height: 74px; }
+.s8t .content-scroll { padding: 16px 16px 14px; }
+.s8t .card { margin-bottom: 16px; }
+.s8t .card:last-child { margin-bottom: 0; }
+.s8t .cover { height: 160px; border-radius: 16px; }
+.s8t .cover-title { font-size: 28px; bottom: 12px; }
+.s8t .card.locked .cover-title { bottom: 42px; }
+
+/* Scrolled screen */
+.s8s .header { height: 64px; }
+.s8s .tabs { height: 40px; }
+.s8s .tabbar { height: 74px; }
+.s8s .content { overflow: hidden; }
+.s8s .content-scroll { padding: 0 16px 14px; }
+.s8s .card-peek {
+  margin: 0 0 16px;
+  margin-top: -84px;
+}
+.s8s .card-peek .cover { height: 160px; border-radius: 16px; }
+.s8s .card-peek .cover-title { font-size: 28px; bottom: 42px; }
+.s8s .card.community-card { margin-bottom: 14px; }
+.s8s .cover.community { height: 220px; border-radius: 16px; }
+.s8s .cover.community .cover-title { font-size: 28px; bottom: 14px; }
+.s8s .card.locked .cover.community .cover-title { bottom: 42px; }
+.s8s .comm-sub {
+  padding: 10px 4px 0;
+  font-size: 13px;
+  color: #8a7a68;
+  font-weight: 400;
+  letter-spacing: -0.1px;
+  line-height: 1.35;
+  font-family: Outfit, Inter, sans-serif;
+}
+
+.qa {
+  margin-top: 4px;
+  background: #fff;
+  border: 1px solid #e8e4de;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(40,36,30,0.06);
+}
+.qa-head {
+  padding: 12px 14px 10px;
+  font-size: 15.5px;
+  font-weight: 650;
+  letter-spacing: -0.3px;
+  color: #1c160e;
+  font-family: Outfit, Inter, sans-serif;
+}
+.qa-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+  border-top: 1px solid #e8e4de;
+  font-size: 13.5px;
+  font-weight: 450;
+  color: #3a3228;
+  letter-spacing: -0.15px;
+  font-family: Outfit, Inter, sans-serif;
+}
+.qa-row .chev {
+  color: #8a8580;
+  font-size: 18px;
+  line-height: 1;
+  font-weight: 400;
+}
+
+/* Shared header height with approved classroom */
+.s8t .header, .stab .header, .smod .header { height: 64px; }
+.stab .tabs, .s8t .tabs { height: 40px; }
+.s8t .tabbar, .stab .tabbar, .smod .tabbar { height: 74px; }
+.stab .content-scroll { padding: 14px 16px 16px; }
+
+/* Inner module header: back + Newsreader title */
+.header .page-title {
+  flex: 1;
+  font-family: Newsreader, serif;
+  font-style: italic;
+  font-weight: 500;
+  font-optical-sizing: auto;
+  font-size: 22px;
+  letter-spacing: -0.4px;
+  color: #1c160e;
+  margin-left: 6px;
+  line-height: 1.1;
+}
+.smod .tabs { display: none; }
+.smod .content-scroll { padding: 12px 16px 18px; }
+
+.lede {
+  font-family: Newsreader, serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 16.5px;
+  line-height: 1.35;
+  letter-spacing: -0.2px;
+  color: #3a3228;
+  margin-bottom: 14px;
+}
+.note {
+  font-size: 12.5px;
+  color: #8a7a68;
+  line-height: 1.4;
+  margin-top: 8px;
+}
+
+/* ——— Community feed ——— */
+.feed-pin {
+  background: #fff;
+  border: 1px solid #e8e4de;
+  border-radius: 16px;
+  padding: 12px 14px 13px;
+  margin-bottom: 12px;
+  box-shadow: 0 4px 14px rgba(40,36,30,0.05);
+}
+.feed-pin .pin-lab {
+  font-size: 10px;
+  font-weight: 650;
+  letter-spacing: 1.1px;
+  text-transform: uppercase;
+  color: #8a8580;
+  margin-bottom: 6px;
+}
+.feed-pin p, .post p {
+  font-size: 14.5px;
+  line-height: 1.4;
+  color: #1c160e;
+  letter-spacing: -0.15px;
+  font-weight: 400;
+}
+.post {
+  padding: 12px 4px 13px;
+  border-top: 1px solid #e8e4de;
+}
+.post:first-of-type { border-top: none; padding-top: 2px; }
+.post-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+.av {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; font-weight: 650;
+  letter-spacing: 0.2px;
+  color: #fffbf5;
+  background: #2a2724;
+  flex-shrink: 0;
+  font-family: Outfit, Inter, sans-serif;
+}
+.av.a { background: #3a3530; }
+.av.b { background: #5a534c; }
+.av.c { background: #2f3a34; }
+.av.d { background: #4a433c; }
+.av.e { background: #6a635c; }
+.av.leon { background: #1c160e; }
+.post-who { font-size: 13.5px; font-weight: 650; letter-spacing: -0.2px; }
+.post-kind { font-size: 11.5px; color: #8a8580; margin-top: 1px; }
+.sample {
+  font-size: 9.5px;
+  font-weight: 650;
+  letter-spacing: 0.9px;
+  text-transform: uppercase;
+  color: #9a9288;
+  border: 1px solid #e8e4de;
+  border-radius: 100px;
+  padding: 1px 6px;
+  margin-left: auto;
+}
+
+/* ——— Calendar ——— */
+.cal-lede {
+  font-size: 13px;
+  color: #6b655c;
+  line-height: 1.4;
+  margin-bottom: 14px;
+}
+.week {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  margin-bottom: 16px;
+}
+.day {
+  text-align: center;
+  padding: 8px 0 9px;
+  border-radius: 12px;
+}
+.day .dow {
+  font-size: 9.5px;
+  font-weight: 650;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: #8a8580;
+}
+.day .num {
+  font-size: 15px;
+  font-weight: 600;
+  margin-top: 3px;
+  color: #1c160e;
+}
+.day.on { background: #1c160e; }
+.day.on .dow, .day.on .num { color: #fffbf5; }
+.day .dot {
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: #1c160e;
+  margin: 5px auto 0;
+}
+.day.on .dot { background: #fffbf5; }
+.day .dot.empty { background: #f4f1eb; }
+.slot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px 2px;
+  border-top: 1px solid #e8e4de;
+}
+.slot:first-of-type { border-top: none; }
+.slot-when { font-size: 14.5px; font-weight: 550; letter-spacing: -0.2px; }
+.slot-sub { font-size: 12px; color: #8a7a68; margin-top: 2px; }
+.pill {
+  font-size: 10.5px;
+  font-weight: 650;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  border-radius: 100px;
+  color: #1c160e;
+  background: #ece8e2;
+  flex-shrink: 0;
+}
+.pill.open { background: #1c160e; color: #fffbf5; }
+.pill.booked { background: #ece8e2; color: #6b6560; }
+
+/* ——— Members ——— */
+.member {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 2px;
+  border-top: 1px solid #e8e4de;
+}
+.member:first-of-type { border-top: none; }
+.member .av { width: 36px; height: 36px; font-size: 12px; }
+.member-name { font-size: 15px; font-weight: 550; letter-spacing: -0.2px; }
+.member-sub { font-size: 12px; color: #8a7a68; margin-top: 1px; }
+.lvl {
+  margin-left: auto;
+  font-size: 10.5px;
+  font-weight: 650;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: #5a534c;
+  background: #ece8e2;
+  padding: 4px 8px;
+  border-radius: 100px;
+  flex-shrink: 0;
+}
+.lvl.one { background: #1c160e; color: #fffbf5; }
+
+/* ——— Buttons ——— */
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 44px;
+  padding: 11px 16px;
+  border-radius: 14px;
+  font-family: Outfit, Inter, sans-serif;
+  font-size: 14.5px;
+  font-weight: 650;
+  letter-spacing: -0.2px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  color: #fffbf5;
+  background: #1c160e;
+}
+.btn.ghost {
+  background: #f4f1eb;
+  color: #1c160e;
+  border: 1px solid #c8c2ba;
+}
+.btn.big {
+  min-height: 52px;
+  font-size: 16px;
+  letter-spacing: -0.3px;
+  margin: 4px 0 12px;
+}
+.btn[disabled], .btn.disabled {
+  background: #ece8e2;
+  color: #6b6560;
+  cursor: default;
+}
+
+/* ——— Start here steps ——— */
+.steps { margin-top: 2px; }
+.step {
+  padding: 12px 0 14px;
+  border-top: 1px solid #e8e4de;
+}
+.step:first-child { border-top: none; padding-top: 2px; }
+.step-num {
+  font-size: 10px;
+  font-weight: 650;
+  letter-spacing: 1.1px;
+  text-transform: uppercase;
+  color: #8a8580;
+  margin-bottom: 4px;
+}
+.step h3 {
+  font-family: Newsreader, serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 20px;
+  letter-spacing: -0.3px;
+  line-height: 1.15;
+  margin-bottom: 6px;
+}
+.step p {
+  font-size: 13px;
+  line-height: 1.4;
+  color: #5a534c;
+}
+.video-ph {
+  margin-top: 10px;
+  height: 112px;
+  border-radius: 14px;
+  background: #1c160e;
+  color: #fffbf5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  position: relative;
+  overflow: hidden;
+}
+.video-ph .play {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid #fffbf5;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px;
+  padding-left: 2px;
+}
+.video-ph .vl {
+  font-size: 11px;
+  font-weight: 650;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+.step .btn { margin-top: 10px; }
+
+/* ——— AI tracker / demo ——— */
+.tracker {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid #e8e4de;
+}
+.tracker h3 {
+  font-family: Newsreader, serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 20px;
+  letter-spacing: -0.3px;
+  margin-bottom: 4px;
+}
+.fields { margin-top: 10px; }
+.field {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 0;
+  border-top: 1px solid #e8e4de;
+}
+.field:first-of-type { border-top: none; }
+.field label { font-size: 13.5px; font-weight: 500; color: #1c160e; }
+.field input[type="number"], .field input[type="text"] {
+  width: 92px;
+  height: 32px;
+  border: none;
+  border-bottom: 1px solid #1c160e;
+  background: #f4f1eb;
+  font-family: Outfit, Inter, sans-serif;
+  font-size: 14.5px;
+  font-weight: 550;
+  color: #1c160e;
+  text-align: right;
+  outline: none;
+}
+.yn {
+  display: flex;
+  gap: 6px;
+}
+.yn button {
+  min-width: 44px;
+  height: 28px;
+  padding: 0 10px;
+  border-radius: 100px;
+  border: 1px solid #c8c2ba;
+  background: #f4f1eb;
+  font-family: Outfit, Inter, sans-serif;
+  font-size: 12px;
+  font-weight: 650;
+  color: #6b6560;
+  cursor: pointer;
+}
+.yn button.on {
+  background: #1c160e;
+  border-color: #1c160e;
+  color: #fffbf5;
+}
+.chart-wrap {
+  margin-top: 12px;
+  height: 84px;
+}
+.chart-wrap svg { width: 100%; height: 84px; display: block; }
+.chart-empty {
+  height: 84px;
+  display: flex;
+  align-items: center;
+  color: #8a8580;
+  font-size: 12.5px;
+}
+.entries {
+  margin-top: 8px;
+  font-size: 11.5px;
+  color: #8a8580;
+}
+
+/* ——— Quick answers / plan ——— */
+.qa-list .qa-row { cursor: default; }
+.plan-block {
+  padding: 12px 0 14px;
+  border-top: 1px solid #e8e4de;
+}
+.plan-block:first-of-type { border-top: none; padding-top: 2px; }
+.plan-block h3 {
+  font-family: Newsreader, serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 20px;
+  letter-spacing: -0.3px;
+  margin-bottom: 6px;
+}
+.plan-block li, .plan-block p {
+  font-size: 13px;
+  line-height: 1.45;
+  color: #5a534c;
+}
+.plan-block li { margin-left: 16px; margin-bottom: 3px; }
+
+/* Lock message page */
+.lock-box {
+  margin-top: 24px;
+  text-align: left;
+}
+.lock-box h2 {
+  font-family: Newsreader, serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 28px;
+  letter-spacing: -0.4px;
+  margin: 10px 0 8px;
+}
+.lock-box p { font-size: 14.5px; line-height: 1.4; color: #5a534c; }
+.lock-box .btn { margin-top: 16px; }
+
+.section-rule {
+  height: 1px;
+  background: #b8b2a8;
+  border: none;
+  margin: 8px 0 12px;
+}
+
+
+/* ——— v2 visuals ——— */
+.hero {
+  height: 148px;
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  margin: 0 0 14px;
+  box-shadow: 0 8px 20px rgba(40,36,30,0.10);
+}
+.hero .scrim {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.0) 46%, rgba(20,12,4,0.52) 100%);
+}
+.hero .sp {
+  position: absolute; right: 10px; top: 10px;
+  width: 36px; height: 28px;
+  background: url("img/sprinter-white.png") center / contain no-repeat;
+  opacity: 0.9;
+  filter: drop-shadow(0 1px 4px rgba(0,0,0,0.35));
+  z-index: 2;
+}
+.hero-tag {
+  position: absolute; left: 14px; top: 12px;
+  font-size: 10px; font-weight: 650; letter-spacing: 1.1px;
+  text-transform: uppercase; color: #fff;
+  background: rgba(255,255,255,0.18);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  padding: 3px 8px; border-radius: 100px; z-index: 2;
+  font-family: Outfit, Inter, sans-serif;
+}
+.hero-title {
+  position: absolute; left: 14px; bottom: 12px;
+  font-family: Newsreader, serif;
+  font-size: 28px; font-weight: 500; font-style: italic;
+  font-optical-sizing: auto; letter-spacing: -0.4px; line-height: 1;
+  color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.35); z-index: 2;
+}
+
+.admin-bar {
+  display: flex; align-items: center;
+  padding: 0 16px 8px;
+  flex-shrink: 0;
+  background: #fffbf5;
+}
+.admin-pill {
+  font-size: 9.5px; font-weight: 650;
+  letter-spacing: 0.55px; text-transform: uppercase;
+  color: #1c160e;
+  border: 1px solid #1c160e;
+  border-radius: 100px;
+  padding: 3px 9px;
+  font-family: Outfit, Inter, sans-serif;
+  white-space: nowrap;
+}
+.admin-hero {
+  height: 88px; border-radius: 14px;
+  background-size: cover; background-position: center;
+  margin-bottom: 12px;
+  position: relative; overflow: hidden;
+  box-shadow: 0 6px 16px rgba(40,36,30,0.08);
+}
+.admin-hero .scrim {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.0) 40%, rgba(20,12,4,0.35) 100%);
+}
+
+.qa-row { justify-content: flex-start; }
+.qa-thumb {
+  width: 44px; height: 44px;
+  border-radius: 10px;
+  background-size: cover; background-position: center;
+  flex-shrink: 0;
+  box-shadow: 0 1px 4px rgba(40,36,30,0.12);
+}
+.qa-row .label { flex: 1; min-width: 0; }
+.qa-row .chev { margin-left: auto; }
+.s8s .qa-row { padding: 10px 12px; }
+.s8s .qa-thumb { width: 40px; height: 40px; }
+.smod .qa-row { padding: 9px 12px; }
+.smod .qa-thumb { width: 40px; height: 40px; }
+
+.post-photo {
+  margin-top: 8px;
+  height: 158px;
+  border-radius: 14px;
+  background-size: cover; background-position: center;
+  box-shadow: 0 4px 14px rgba(40,36,30,0.08);
+}
+.av.photo {
+  background-size: cover; background-position: center;
+  color: transparent;
+  box-shadow: inset 0 0 0 1px rgba(28,22,14,0.12);
+}
+
+.week {
+  background: #fff;
+  border: 1px solid #e8e4de;
+  border-radius: 16px;
+  padding: 8px 6px 10px;
+  box-shadow: 0 4px 14px rgba(40,36,30,0.05);
+}
+.call-card {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  background: #fff;
+  border: 1px solid #e8e4de;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 14px rgba(40,36,30,0.05);
+}
+.call-card .pic {
+  width: 104px;
+  flex-shrink: 0;
+  background-size: cover; background-position: center;
+}
+.call-card .body {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 12px 12px 12px 12px;
+  min-width: 0;
+}
+.call-card .slot-when { font-size: 13.5px; }
+.slot.plain { display: none; }
+
+.step-card {
+  display: flex;
+  align-items: stretch;
+  background: #fff;
+  border: 1px solid #e8e4de;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 14px rgba(40,36,30,0.05);
+}
+.step-card .pic {
+  width: 108px;
+  flex-shrink: 0;
+  background-size: cover; background-position: center;
+  position: relative;
+  min-height: 108px;
+}
+.step-card .pic .play {
+  position: absolute; left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  width: 32px; height: 32px; border-radius: 50%;
+  background: rgba(28,22,14,0.82);
+  color: #fffbf5;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; padding-left: 2px;
+}
+.step-card .body {
+  flex: 1; min-width: 0;
+  padding: 10px 12px 11px;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.step-card .step-num { margin-bottom: 2px; }
+.step-card h3 {
+  font-family: Newsreader, serif;
+  font-style: italic; font-weight: 500;
+  font-size: 18px; letter-spacing: -0.3px;
+  line-height: 1.15; margin: 0 0 3px;
+}
+.step-card p {
+  font-size: 12.5px; line-height: 1.35; color: #5a534c; margin: 0;
+}
+.step-card .btn { margin-top: 8px; min-height: 34px; padding: 7px 12px; font-size: 13px; border-radius: 12px; }
+.step-card .note { margin-top: 4px; }
+
+.smod .lede { margin-bottom: 12px; font-size: 15.5px; }
+.smod .hero + .lede { margin-top: 0; }
+
+.viz { margin-top: 8px; }
+.viz-lab {
+  font-size: 10px; font-weight: 650; letter-spacing: 1.1px;
+  text-transform: uppercase; color: #8a8580;
+  margin: 10px 0 6px;
+  font-family: Outfit, Inter, sans-serif;
+}
+.steps-bars {
+  display: flex; align-items: flex-end; gap: 8px;
+  height: 64px;
+  padding: 0 2px;
+}
+.steps-bars .col {
+  flex: 1; height: 100%;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: flex-end; gap: 4px;
+}
+.steps-bars .col .track {
+  width: 6px;
+  background: #e8e4de;
+  border-radius: 0;
+  display: flex; align-items: flex-end;
+  overflow: hidden;
+  flex: 0 0 auto;
+}
+.steps-bars .col .track i {
+  display: block; width: 6px; background: #1c160e;
+  border-radius: 0;
+}
+.steps-bars .col span {
+  font-size: 9px; font-weight: 650; letter-spacing: 0.4px;
+  text-transform: uppercase; color: #8a8580;
+}
+.stats {
+  display: grid; grid-template-columns: repeat(5, 1fr);
+  gap: 6px; margin-top: 10px;
+}
+.stat {
+  background: #fff; border: 1px solid #e8e4de; border-radius: 12px;
+  padding: 8px 4px 7px; text-align: center;
+}
+.stat b {
+  display: block; font-size: 13px; font-weight: 650; letter-spacing: -0.2px;
+}
+.stat span {
+  display: block; margin-top: 2px;
+  font-size: 9px; font-weight: 650; letter-spacing: 0.5px;
+  text-transform: uppercase; color: #8a8580;
+}
+
+.tracker { margin-top: 8px; }
+.smod .btn.big { margin: 2px 0 6px; }
+
+.lock-hero { margin-top: 0; }
+
+
+.proto-bar { display: flex; flex-direction: column; align-items: center; gap: 12px; margin-bottom: 4px; }
+.page-label { font-size: 11px; letter-spacing: 1.6px; text-transform: uppercase; color: #6b6560; font-weight: 650; }
+.view-toggle { display: flex; border: 1px solid #1c160e; border-radius: 100px; overflow: hidden; }
+.view-toggle button {
+  background: transparent; border: none; padding: 7px 16px;
+  font-family: Outfit, Inter, sans-serif; font-size: 12px; font-weight: 650;
+  letter-spacing: 0.2px; color: #1c160e; cursor: pointer;
+}
+.view-toggle button.on { background: #1c160e; color: #fffbf5; }
+.phone-wrap { display: block; margin: 0; }
+.content { overflow: auto; -webkit-overflow-scrolling: touch; }
+.content-scroll { padding-bottom: 24px; }
+.icon-btn { background: none; border: none; cursor: pointer; color: inherit; }
+.card, .qa-row, .tab, .call-card, .step-card { cursor: pointer; }
+.qa-row { width: 100%; background: none; border-left: none; border-right: none; border-bottom: none; text-align: left; }
+.qa-item .qa-row { border-top: 1px solid #e8e4de; }
+.qa-item:first-child .qa-row { border-top: none; }
+.qa-body { display: none; padding: 0 16px 14px 16px; font-size: 13px; color: #5a534c; line-height: 1.45; }
+.qa-item.open .qa-body { display: block; }
+.qa-item.open .chev { transform: rotate(90deg); display: inline-block; }
+.fields { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+.field { display: flex; flex-direction: column; gap: 4px; }
+.field label { font-size: 10px; font-weight: 650; letter-spacing: 1px; text-transform: uppercase; color: #8a8580; }
+.field input {
+  height: 40px; border: 1px solid #e8e4de; border-radius: 10px;
+  padding: 0 10px; font-family: Outfit, Inter, sans-serif; font-size: 15px;
+  background: #fff; color: #1c160e;
+}
+.yn { display: flex; gap: 6px; }
+.yn button {
+  flex: 1; height: 40px; border: 1px solid #e8e4de; border-radius: 10px;
+  background: #fff; font-family: Outfit, Inter, sans-serif; font-size: 12px;
+  font-weight: 650; color: #6b6560; cursor: pointer;
+}
+.yn button.on { background: #1c160e; border-color: #1c160e; color: #fffbf5; }
+.toast {
+  position: absolute; left: 24px; right: 24px; top: 66px; z-index: 50;
+  background: #1c160e; color: #fffbf5; text-align: center;
+  padding: 10px 14px; border-radius: 12px; font-size: 13px; font-weight: 550;
+  opacity: 0; pointer-events: none; transition: opacity .2s;
+}
+.toast.show { opacity: 1; }
+.more-menu {
+  display: none; position: absolute; right: 18px; top: 112px; z-index: 45;
+  background: #fff; border: 1px solid #e8e4de; border-radius: 14px;
+  box-shadow: 0 12px 28px rgba(40,36,30,0.14); min-width: 200px; overflow: hidden;
+}
+.more-menu.open { display: block; }
+.more-menu button {
+  display: block; width: 100%; text-align: left; background: none; border: none;
+  padding: 12px 14px; font-family: Outfit, Inter, sans-serif; font-size: 13.5px;
+  color: #1c160e; cursor: pointer;
+}
+.more-menu button + button { border-top: 1px solid #e8e4de; }
+.more-menu button.on { font-weight: 650; }
+.tabs.hidden { display: none; }
+.admin-bar.hidden { display: none; }
+
+
+/* v3 calmer marks */
+.community-card .cover { height: 220px; border-radius: 16px; }
+.community-card .cover-title { bottom: 14px; }
+.hero { height: 132px; }
+.mark {
+  width: 56px; height: 56px; flex-shrink: 0; border-radius: 12px;
+  background-color: #a5a5a5;
+  background-image: url("img/sprinter-white-on-grey.png");
+  background-position: center; background-size: cover; background-repeat: no-repeat;
+}
+.av.mark {
+  width: 28px; height: 28px; border-radius: 50%; color: transparent; box-shadow: none;
+  background-color: #a5a5a5;
+  background-image: url("img/sprinter-white-on-grey.png");
+  background-position: center; background-size: cover;
+}
+.member .av.mark { width: 36px; height: 36px; }
+.call-card { align-items: center; padding: 12px 14px; margin-bottom: 14px; gap: 12px; }
+.call-card .pic { display: none; }
+.call-card .mark { margin: 0; }
+.call-card .body { padding: 0; }
+.step-card { align-items: center; margin-bottom: 10px; padding: 2px 2px 2px 0; }
+.step-card .pic { display: none; }
+.step-card .mark { margin: 12px 0 12px 14px; }
+.step-card .body { padding: 10px 14px 11px 12px; }
+.qa-thumb { display: none; }
+.admin-hero { display: none; }
+.stab .content-scroll, .content-scroll { padding-bottom: 24px; }
+.post { padding: 16px 4px 18px; }
+.post-photo { height: 168px; margin-top: 10px; }
+.qa-row { padding: 14px 16px; }
+.member { padding: 14px 2px; }
+.feed-pin { margin-bottom: 16px; padding: 14px 16px 15px; }
+.week { margin-bottom: 18px; }
+.cal-lede { margin-bottom: 16px; }
+.smod .lede { margin-bottom: 12px; }
+
+
+/* ——— Live mobile page: no device frame, full screen ——— */
+html, body.live {
+  height: 100%;
+  background: #f4f1eb;
+}
+body.live {
+  min-height: 100dvh;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 0 !important;
+  margin: 0;
+}
+body.live .proto-bar {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 430px;
+  margin: 0 auto;
+  padding: calc(8px + env(safe-area-inset-top, 0px)) 16px 8px;
+  background: #fffbf5;
+  border-bottom: 1px solid #e8e4de;
+  box-sizing: border-box;
+  z-index: 20;
+}
+body.live .page-label { margin: 0; font-size: 10px; }
+body.live .phone-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 430px;
+  margin: 0 auto;
+  padding: 0 !important;
+  min-height: 0;
+}
+body.live .phone,
+body.live .screen {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+  background: #fffbf5 !important;
+  overflow: hidden;
+  position: relative;
+  flex: 1;
+  min-height: 0;
+}
+body.live .phone-btn,
+body.live .dynamic-island,
+body.live .status-bar,
+body.live .home-ind { display: none !important; }
+body.live .app {
+  height: 100% !important;
+  padding-top: 0 !important;
+  background: #fffbf5;
+}
+body.live .tabbar {
+  padding-bottom: calc(8px + env(safe-area-inset-bottom, 0px));
+  height: auto;
+  min-height: 64px;
+}
+body.live .more-menu { top: 58px; right: 10px; }
+body.live .toast { top: 12px; left: 16px; right: 16px; }
+@media (min-width: 480px) {
+  body.live { background: #e8e4de; }
+  body.live .proto-bar,
+  body.live .phone-wrap {
+    box-shadow: 0 0 0 1px #e8e4de;
+  }
+}
+
+</style>
+</head>
+<body class="live">
+  <div class="proto-bar">
+    <div class="page-label">Natural Ascend · Test</div>
+    <div class="view-toggle" role="group" aria-label="Role">
+      <button type="button" id="view-member" class="on">Member view</button>
+      <button type="button" id="view-admin">Admin view</button>
+    </div>
+  </div>
+
+  <div class="phone-wrap">
+    <div class="phone">
+      <div class="phone-btn btn-silent"></div>
+      <div class="phone-btn btn-vol-up"></div>
+      <div class="phone-btn btn-vol-down"></div>
+      <div class="phone-btn btn-power"></div>
+      <div class="screen">
+        <div class="dynamic-island"><div class="cam"></div></div>
+        <div class="status-bar">
+          <div class="sb-time">9:41</div>
+          <div class="sb-icons">
+            <svg width="18" height="12" viewBox="0 0 18 12" fill="currentColor"><rect x="0" y="7.2" width="3.1" height="4.8" rx="0.6"/><rect x="4.7" y="4.8" width="3.1" height="7.2" rx="0.6"/><rect x="9.4" y="2.4" width="3.1" height="9.6" rx="0.6"/><rect x="14.1" y="0" width="3.1" height="12" rx="0.6"/></svg>
+            <svg width="16" height="12" viewBox="0 0 16 12" fill="none"><path d="M1.2 4.2A9.4 9.4 0 0 1 8 1.6c2.6 0 5 .9 6.8 2.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M3.6 6.6A5.8 5.8 0 0 1 8 4.8c1.6 0 3.1.6 4.4 1.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M5.9 9A2.8 2.8 0 0 1 8 8.1c.8 0 1.6.3 2.1.9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="8" cy="11" r="1.05" fill="currentColor"/></svg>
+            <svg width="27" height="13" viewBox="0 0 27 13" fill="none"><rect x="0.6" y="0.6" width="22.5" height="11.8" rx="2.4" stroke="currentColor" stroke-width="1.2" opacity="0.45"/><rect x="2.3" y="2.3" width="19.2" height="8.4" rx="1.2" fill="currentColor"/><path d="M24.6 4.2v4.6c1.2-.6 1.6-1.4 1.6-2.3s-.4-1.7-1.6-2.3z" fill="currentColor" opacity="0.45"/></svg>
+          </div>
+        </div>
+        <div class="app" id="app">
+          <div class="header" id="header"></div>
+          <div class="admin-bar hidden" id="admin-bar"><span class="admin-pill">Admin view, only Leon sees this</span></div>
+          <div class="tabs" id="tabs"></div>
+          <div class="content"><div class="content-scroll" id="main"></div></div>
+          <div class="tabbar">
+            <div class="tabbar-item on"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M3.5 10.2L11 3.5l7.5 6.7V18a1.2 1.2 0 0 1-1.2 1.2h-4.1v-5.3H8.8V19.2H4.7A1.2 1.2 0 0 1 3.5 18V10.2z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span>Home</span></div>
+            <div class="tabbar-item"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="7.5" stroke="currentColor" stroke-width="1.6"/><path d="M11 5.5c1.7 1.8 2.6 3.7 2.6 5.5s-.9 3.7-2.6 5.5M11 5.5C9.3 7.3 8.4 9.2 8.4 11s.9 3.7 2.6 5.5M5 11h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><span>Discover</span></div>
+            <div class="tabbar-item"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M5.5 9.2a5.5 5.5 0 0 1 11 0c0 4 1.5 5.3 1.5 5.3H4s1.5-1.3 1.5-5.3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9.2 16.8a1.8 1.8 0 0 0 3.6 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>Activity</span></div>
+            <div class="tabbar-item"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="8" r="3.1" stroke="currentColor" stroke-width="1.6"/><path d="M4.8 18c.7-3 3.1-4.6 6.2-4.6s5.5 1.6 6.2 4.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>You</span></div>
+            <div class="home-ind"></div>
+          </div>
+        </div>
+        <div class="more-menu" id="more-menu">
+          <button type="button" id="menu-member">Member view</button>
+          <button type="button" id="menu-admin">Admin view</button>
+        </div>
+        <div class="toast" id="toast"></div>
+      </div>
+    </div>
+  </div>
+
+<script>
+/* Drop the published Claude artifact URL here. Leave empty until you have it. */
+const ARTIFACT_URL = 'https://claude.ai/artifact/BJ9ZESsuQQekYiDvYs2KCd';
+/* The tracker is named "Jacked" + the client's first name. */
+const CLIENT_NAME = 'German';
+
+function jacked() { return 'Jacked ' + CLIENT_NAME; }
+
+const BACK = '<svg width="12" height="20" viewBox="0 0 12 20" fill="none"><path d="M10.5 1.5L2 10l8.5 8.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+const SHARE = '<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 12.5V3.8M10 3.8L7 6.7M10 3.8L13 6.7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M4.2 10.2v5.1A1.7 1.7 0 0 0 5.9 17h8.2a1.7 1.7 0 0 0 1.7-1.7v-5.1" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>';
+const MORE = '<svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><circle cx="4.5" cy="10" r="1.45"/><circle cx="10" cy="10" r="1.45"/><circle cx="15.5" cy="10" r="1.45"/></svg>';
+const LOCK = '<svg width="11" height="13" viewBox="0 0 11 13" fill="none"><rect x="1" y="5.5" width="9" height="6.5" rx="1.4" stroke="currentColor" stroke-width="1.4"/><path d="M3 5.5V3.6a2.5 2.5 0 0 1 5 0v1.9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>';
+
+const ALL_TABS = ["Community","Classroom","Calendar","Members"];
+const TAB_VIEWS = { Community: "community", Classroom: "classroom", Calendar: "calendar", Members: "members" };
+const TOP_VIEWS = ["community","classroom","calendar","members"];
+const TRACK_KEY = "na-demo-tracker-v2";
+
+const SAMPLE_LOG = [
+  { date: "2026-11-10", weight: 82.4, steps: 8200, training: "No", protein: "Yes", sleep: 7 },
+  { date: "2026-11-11", weight: 82.1, steps: 10400, training: "Yes", protein: "Yes", sleep: 7.5 },
+  { date: "2026-11-12", weight: 82.6, steps: 6100, training: "No", protein: "Yes", sleep: 6.5 },
+  { date: "2026-11-13", weight: 81.9, steps: 9800, training: "Yes", protein: "Yes", sleep: 8 },
+  { date: "2026-11-14", weight: 81.7, steps: 11200, training: "Yes", protein: "Yes", sleep: 7.5 }
+];
+
+const QA = [
+  ["Where is my plan?", "step-tracker.jpg", ["Your plan lives in " + jacked() + ".", "Open it from Classroom. There is no separate plan page."]],
+  ["Eating out", "qa-eating.jpg", ["Pick protein first, then veg, then the rest.", "Don't try to be perfect. Just don't turn it into a free-for-all.", "Log it in the tracker the same day and move on."]],
+  ["Travel", "qa-travel.jpg", ["Walk more than you think. If you can train, even 20–30 minutes counts.", "Keep the daily check-in going. That's the habit, not the gym you left at home.", "First meal back home is back on. Not next Monday."]],
+  ["Missed a training day", "qa-missed.jpg", ["Don't double up tomorrow.", "Do the next session on the plan and keep the week moving.", "One miss is nothing. Three in a row is the thing we catch."]],
+  ["Plateau", "qa-plateau.jpg", ["Check the boring stuff first: sleep, steps, meals actually logged.", "Don't change five things at once.", "Bring it to the Sunday review in " + jacked() + "."]],
+  ["Alcohol", "qa-alcohol.jpg", ["If you're going to drink, plan it. Don't surprise yourself.", "Keep protein and steps the same that day.", "The next morning is a normal day, not a write-off."]],
+  ["Work dinners", "qa-dinners.jpg", ["Have some protein before you go.", "Still do the check-in."]],
+  ["Only have 30 minutes", "qa-30min.jpg", ["Do the main work, drop the extras. A short session counts."]],
+  ["Sleep was bad", "qa-sleep.jpg", ["Still train if you can, just don't chase a PR."]],
+  ["The scale jumped", "qa-scale.jpg", ["Usually water or a late meal. We look at the weekly average."]],
+  ["Meals went off", "qa-meals.jpg", ["The next meal is back on. Not next Monday."]]
+];
+
+let current = "classroom";
+let lastTab = "classroom";
+let adminView = false;
+let formState = { training: "No", protein: "No" };
+
+function toast(msg) {
+  const el = document.getElementById("toast");
+  el.textContent = msg;
+  el.classList.add("show");
+  clearTimeout(toast._t);
+  toast._t = setTimeout(() => el.classList.remove("show"), 1800);
+}
+
+function openArtifact() {
+  if (ARTIFACT_URL) {
+    window.open(ARTIFACT_URL, "_blank", "noopener");
+  } else {
+    toast("Artifact link coming");
+  }
+}
+
+function artifactBtn(big) {
+  const cls = big ? "btn big" : "btn";
+  if (ARTIFACT_URL) {
+    return '<button class="' + cls + '" type="button" data-act="artifact" id="btn-artifact">Open ' + jacked() + '</button>';
+  }
+  return '<button class="' + cls + ' disabled" type="button" data-act="artifact" id="btn-artifact" disabled>Artifact link coming</button>';
+}
+
+function header(view) {
+  const isTop = TOP_VIEWS.includes(view);
+  const titles = {
+    "start-here": "Start here",
+    "tracker": jacked(),
+    "quick-answers": "Quick answers",
+    "your-calls": "Your calls",
+    "lock-tracker": jacked(),
+    "lock-calls": "Your calls",
+    "lock-community": "Community"
+  };
+  const title = isTop
+    ? '<div class="wm" role="img" aria-label="natural ascend."></div>'
+    : '<div class="page-title">' + (titles[view] || "") + '</div>';
+  return '<div class="actions-left"><button class="icon-btn" type="button" data-act="back" id="btn-back">' + BACK + '</button></div>' +
+    title +
+    '<div class="header-actions"><button class="icon-btn right" type="button" data-act="share">' + SHARE + '</button>' +
+    '<button class="icon-btn right" type="button" data-act="more" id="btn-more">' + MORE + '</button></div>';
+}
+
+function visibleTabs() {
+  return adminView ? ALL_TABS : ALL_TABS.slice(0, 3);
+}
+
+function tabsBar(view) {
+  const show = TOP_VIEWS.includes(view);
+  if (!show) return { html: "", show: false, admin: false };
+  const onName = Object.keys(TAB_VIEWS).find(k => TAB_VIEWS[k] === view);
+  const html = visibleTabs().map(n =>
+    '<button class="tab' + (n === onName ? ' on' : '') + '" type="button" data-tab="' + n + '">' + n + '</button>'
+  ).join("");
+  return { html: html, show: true, admin: adminView && view === "members" };
+}
+
+function cover(file, title, tag, lock, label) {
+  const lockHtml = lock ? '<div class="lock-pill">' + LOCK + label + '</div>' : '';
+  const extra = (file === 'card-community.jpg') ? ' community' : '';
+  return '<div class="cover' + extra + '" style="background-image:url(\'img/' + file + '\')"><div class="scrim"></div><div class="sp"></div>' +
+    '<div class="cover-tag">' + tag + '</div><div class="cover-title">' + title + '</div>' + lockHtml + '</div>';
+}
+function hero(file, title, tag) {
+  return '<div class="hero" style="background-image:url(\'img/' + file + '\')"><div class="scrim"></div><div class="sp"></div>' +
+    '<div class="hero-tag">' + tag + '</div><div class="hero-title">' + title + '</div></div>';
+}
+function prog(lab, pct, locked) {
+  return '<div class="prog' + (locked ? ' locked' : '') + '"><div class="bar"><i style="width:' + pct + '"></i></div>' +
+    (lab ? '<div class="prog-lab">' + lab + '</div>' : '<div class="prog-lab"></div>') + '</div>';
+}
+function qaRow(label, thumb) {
+  return '<span class="label">' + label + '</span><span class="chev">›</span>';
+}
+function callCard(when, sub, pill, pillCls, go) {
+  const goAttr = go ? ' data-go="' + go + '"' : '';
+  return '<div class="call-card"' + goAttr + '><div class="mark" aria-hidden="true"></div>' +
+    '<div class="body"><div><div class="slot-when">' + when + '</div><div class="slot-sub">' + sub + ' · Sample</div></div>' +
+    '<span class="pill ' + pillCls + '">' + pill + '</span></div></div>';
+}
+function day(dow, num, call, today) {
+  return '<div class="day' + (today ? ' on' : '') + '"><div class="dow">' + dow + '</div><div class="num">' + num + '</div>' +
+    '<div class="dot' + (call ? '' : ' empty') + '"></div></div>';
+}
+function post(initials, av, who, kind, body, photo, leon) {
+  const avCls = leon ? 'av mark' : 'av ' + av;
+  const pic = photo ? '<div class="post-photo" style="background-image:url(\'img/' + photo + '\')"></div>' : '';
+  return '<article class="post"><div class="post-meta"><div class="' + avCls + '">' + (leon ? '' : initials) + '</div>' +
+    '<div><div class="post-who">' + who + '</div><div class="post-kind">' + kind + '</div></div>' +
+    '<span class="sample">Sample</span></div><p>' + body + '</p>' + pic + '</article>';
+}
+function member(ini, av, name, label, one, mark) {
+  const avCls = mark ? 'av mark' : 'av ' + av;
+  return '<div class="member"><div class="' + avCls + '">' + (mark ? '' : ini) + '</div>' +
+    '<div><div class="member-name">' + name + '</div><div class="member-sub">' + (label === 'Coach' ? 'Coach' : 'Member') + '</div></div>' +
+    '<span class="lvl' + (one ? ' one' : '') + '">' + label + '</span></div>';
+}
+function stepCard(num, title, body, btnHtml) {
+  return '<div class="step-card"><div class="mark" aria-hidden="true"></div>' +
+    '<div class="body"><div class="step-num">' + num + '</div><h3>' + title + '</h3><p>' + body + '</p>' + (btnHtml || '') + '</div></div>';
+}
+
+function weekStrip() {
+  return '<div class="week">' +
+    day("Mon","16", false, true) + day("Tue","17", true, false) + day("Wed","18", false, false) +
+    day("Thu","19", true, false) + day("Fri","20", false, false) + day("Sat","21", false, false) + day("Sun","22", false, false) +
+    '</div>';
+}
+
+function views(name) {
+  if (name === "classroom") {
+    return '' +
+      '<article class="card" data-go="start-here">' + cover("card-start.jpg", "Start here", "The first 10 min", false) + prog("3/3 · Completed", "100%", false) + '</article>' +
+      '<article class="card" data-go="tracker">' + cover("card-tracker.jpg", jacked(), "Your AI tracker", false) + prog("", "0%", false) + '</article>' +
+      '<article class="card" data-go="your-calls">' + cover("card-calls.jpg", "Your calls", "1:1 Online", false) + prog("", "0%", false) + '</article>' +
+      '<article class="card community-card" data-go="community" style="margin-top:16px">' +
+        cover("card-community.jpg", "Community", "The group", false) + prog("", "0%", false) +
+        '<div class="comm-sub">Post wins, short check-ins, and questions.</div></article>' +
+      '<div class="qa" style="margin-top:14px">' +
+        '<div class="qa-head">Quick answers</div>' +
+        '<button class="qa-row" type="button" data-go="quick-answers">' + qaRow("How do I book a call?", "cal-call.jpg") + '</button>' +
+        '<button class="qa-row" type="button" data-go="quick-answers">' + qaRow("Where is my plan?", "step-tracker.jpg") + '</button>' +
+        '<button class="qa-row" type="button" data-go="quick-answers">' + qaRow("How do I post a win?", "feed-team.jpg") + '</button>' +
+      '</div>';
+  }
+  if (name === "community") {
+    return '<div class="feed-pin"><div class="pin-lab">Weekly prompt · Sample</div>' +
+      '<p>One line: what moved this week, and what’s the one thing you’re doing next week.</p></div>' +
+      post("L", "leon", "Leon", "Note", "In the gym today. Keep the check-in short — the tracker holds the plan.", "feed-gym.jpg", true) +
+      post("A", "b", "A.", "Win", "Hit the sessions I had planned. Next week I’m protecting sleep.") +
+      post("M", "a", "M.", "Check-in", "Kept the daily log going this week, even on the late nights.") +
+      post("S", "c", "S.K.", "Check-in", "Sunday review done. One thing to fix, then back to it.");
+  }
+  if (name === "calendar") {
+    return '<p class="cal-lede">1:1 calls, 30 minutes, twice a week. This week and next.</p>' +
+      weekStrip() +
+      callCard("Tue 17 Nov, 07:00–07:30", "30-min call", "Open", "open", "your-calls") +
+      callCard("Thu 19 Nov, 18:30–19:00", "30-min call", "Booked", "booked", "your-calls") +
+      callCard("Tue 24 Nov, 07:00–07:30", "30-min call", "Open", "open", "your-calls") +
+      '<button class="btn ghost" type="button" data-act="book" style="margin-top:6px">Book a call</button>' +
+      '<p class="note">Booking link to come.</p>';
+  }
+  if (name === "members") {
+    return '<p class="cal-lede">Sample list. Initials only. Visible to Leon only.</p>' +
+      member("L","leon","L.","Coach", true, true) +
+      member("A","a","A.M.","1:1", true) +
+      member("J","b","J.P.","1:1", true) +
+      member("S","c","S.K.","1:1", true) +
+      member("M","d","M.","Low ticket", false) +
+      member("R","e","R.T.","Low ticket", false) +
+      member("C","a","C.L.","Low ticket", false) +
+      member("D","b","D.","1:1", true);
+  }
+  if (name === "start-here") {
+    return hero("hero-start.jpg", "Start here", "The first 10 min") +
+      '<p class="lede">Do these 3 things and you’re set. Then the only daily habit is the 30-second check-in.</p>' +
+      '<div class="step-card" data-act="video"><div class="mark" aria-hidden="true"></div>' +
+        '<div class="body"><div class="step-num">Step 1 · 3 min</div><h3>Watch the welcome</h3><p>Play the video. That’s the whole briefing.</p></div></div>' +
+      '<div class="step-card"><div class="mark" aria-hidden="true"></div>' +
+        '<div class="body"><div class="step-num">Step 2 · 2 min</div><h3>Open ' + jacked() + '</h3>' +
+        '<p>Your training and meals live in the tracker — there’s no separate plan page. A free Claude account is enough.</p>' +
+        artifactBtn(false) + '</div></div>' +
+      '<div class="step-card"><div class="mark" aria-hidden="true"></div>' +
+        '<div class="body"><div class="step-num">Step 3 · 1 min</div><h3>Book your first call</h3>' +
+        '<p>If you’re on 1:1, come with your week, typical meals, and one goal with a date.</p>' +
+        '<button class="btn ghost" type="button" data-act="book">Book a call</button>' +
+        '<p class="note">Booking link to come.</p></div></div>';
+  }
+  if (name === "tracker") {
+    return hero("hero-tracker.jpg", jacked(), "Your AI tracker") +
+      '<p class="lede">Once a day, morning is best for weight. Sunday, ask for the weekly review.</p>' +
+      artifactBtn(true) +
+      '<p class="note">Opens in a new tab. Usage is on your own Claude account; a free account is enough.</p>' +
+      '<div class="tracker" id="demo-tracker">' +
+        '<h3>Demo tracker</h3>' +
+        '<p class="note" style="margin:0 0 4px">A built-in test log. Saved on this device. Not the Claude artifact. Your plan lives here.</p>' +
+        '<div class="viz-lab">Weight</div><div id="weight-chart"></div>' +
+        '<div class="viz-lab">Steps</div><div id="steps-bars"></div>' +
+        '<div class="fields">' +
+          '<div class="field"><label>Weight</label><input id="f-weight" type="number" inputmode="decimal" step="0.1" placeholder="kg"></div>' +
+          '<div class="field"><label>Steps</label><input id="f-steps" type="number" inputmode="numeric" placeholder="yesterday"></div>' +
+          '<div class="field"><label>Training done</label><div class="yn" id="yn-training"><button type="button" data-yn="training" data-val="Yes">Yes</button><button type="button" class="on" data-yn="training" data-val="No">No</button></div></div>' +
+          '<div class="field"><label>Protein hit</label><div class="yn" id="yn-protein"><button type="button" data-yn="protein" data-val="Yes">Yes</button><button type="button" class="on" data-yn="protein" data-val="No">No</button></div></div>' +
+          '<div class="field" style="grid-column:1 / -1"><label>Sleep hours</label><input id="f-sleep" type="number" inputmode="decimal" step="0.5" placeholder="hrs"></div>' +
+        '</div>' +
+        '<button class="btn ghost" type="button" id="btn-save" style="margin-top:12px">Save check-in</button>' +
+        '<div class="entries" id="entries"></div>' +
+      '</div>';
+  }
+  if (name === "quick-answers") {
+    const items = QA.map((q, i) => {
+      const body = q[2].map(li => '<li>' + li + '</li>').join("");
+      return '<div class="qa-item' + (i === 0 ? ' open' : '') + '">' +
+        '<button class="qa-row" type="button" data-act="qa">' + qaRow(q[0], q[1]) + '</button>' +
+        '<div class="qa-body"><ul>' + body + '</ul></div></div>';
+    }).join("");
+    return hero("hero-qa.jpg", "Quick answers", "Two minutes") +
+      '<p class="lede">Something come up? Check here first, then get back to your day.</p>' +
+      '<div class="qa" style="margin-top:4px">' + items + '</div>';
+  }
+  if (name === "your-calls") {
+    return hero("hero-calls.jpg", "Your calls", "1:1 Online") +
+      '<p class="lede">30-minute calls, twice a week. Come with one question and the week as it actually went.</p>' +
+      callCard("Tue 17 Nov, 07:00–07:30", "30-min call", "Open", "open") +
+      callCard("Thu 19 Nov, 18:30–19:00", "30-min call", "Booked", "booked") +
+      callCard("Tue 24 Nov, 07:00–07:30", "30-min call", "Open", "open") +
+      '<button class="btn" type="button" data-act="book" style="margin-top:6px">Book a call</button>' +
+      '<p class="note">Booking link to come. Sample times.</p>';
+  }
+  if (name === "lock-tracker") {
+    return hero("card-tracker.jpg", jacked(), "Your AI tracker") +
+      '<div class="lock-box"><h2>Unlock after onboarding</h2>' +
+      '<p>' + jacked() + ' holds your training and meals. It opens after onboarding — there’s no separate plan page.</p>' +
+      '<button class="btn" type="button" data-go="start-here">Go to Start here</button></div>';
+  }
+  if (name === "lock-calls") {
+    return hero("card-calls.jpg", "Your calls", "1:1 Online") +
+      '<div class="lock-box"><h2>Unlock with 1:1 Online</h2>' +
+      '<p>1:1 calls are twice a week, 30 minutes. This unlocks when you’re on 1:1 Online.</p>' +
+      '<button class="btn ghost" type="button" data-act="back">Back</button></div>';
+  }
+  if (name === "lock-community") {
+    return hero("card-community.jpg", "Community", "The group") +
+      '<div class="lock-box"><h2>Unlock with 1:1</h2>' +
+      '<p>The Community tab is already the 1:1 feed. This classroom card unlocks with 1:1.</p>' +
+      '<button class="btn" type="button" data-go="community">Open Community</button></div>';
+  }
+  return "";
+}
+
+function setRole(isAdmin) {
+  adminView = !!isAdmin;
+  document.getElementById("view-member").classList.toggle("on", !adminView);
+  document.getElementById("view-admin").classList.toggle("on", adminView);
+  document.getElementById("menu-member").classList.toggle("on", !adminView);
+  document.getElementById("menu-admin").classList.toggle("on", adminView);
+  if (!adminView && current === "members") current = "classroom";
+  go(current);
+}
+
+function go(view) {
+  current = view;
+  if (TOP_VIEWS.includes(view)) lastTab = view;
+  document.getElementById("header").outerHTML = '<div class="header" id="header">' + header(view) + '</div>';
+  const tb = tabsBar(view);
+  const tabsEl = document.getElementById("tabs");
+  tabsEl.innerHTML = tb.html;
+  tabsEl.classList.toggle("hidden", !tb.show);
+  document.getElementById("admin-bar").classList.toggle("hidden", !tb.admin);
+  const main = document.getElementById("main");
+  main.innerHTML = views(view);
+  main.parentElement.scrollTop = 0;
+  document.getElementById("more-menu").classList.remove("open");
+  if (view === "tracker") bindTracker();
+  document.body.setAttribute("data-view", view);
+  document.body.setAttribute("data-role", adminView ? "admin" : "member");
+}
+
+function loadEntries() {
+  try { return JSON.parse(localStorage.getItem(TRACK_KEY) || "[]"); }
+  catch (e) { return []; }
+}
+
+function bindTracker() {
+  formState = { training: "No", protein: "No" };
+  document.getElementById("btn-save").addEventListener("click", saveCheckin);
+  renderTracker();
+}
+
+function saveCheckin() {
+  const weight = parseFloat(document.getElementById("f-weight").value);
+  const steps = parseInt(document.getElementById("f-steps").value, 10);
+  const sleep = parseFloat(document.getElementById("f-sleep").value);
+  if (!(weight > 0) || !(steps >= 0) || !(sleep >= 0)) {
+    toast("Add weight, steps and sleep first.");
+    return;
+  }
+  const all = loadEntries();
+  const today = new Date().toISOString().slice(0, 10);
+  const entry = { date: today, weight: weight, steps: steps, training: formState.training, protein: formState.protein, sleep: sleep };
+  const idx = all.findIndex(e => e.date === today);
+  if (idx >= 0) all[idx] = entry; else all.push(entry);
+  localStorage.setItem(TRACK_KEY, JSON.stringify(all));
+  toast("Check-in saved.");
+  renderTracker();
+}
+
+function renderTracker() {
+  const user = loadEntries();
+  const usingSample = user.length === 0;
+  const all = usingSample ? SAMPLE_LOG : user;
+  const chart = document.getElementById("weight-chart");
+  const bars = document.getElementById("steps-bars");
+  const list = document.getElementById("entries");
+  const title = document.querySelector("#demo-tracker h3");
+  if (title) title.textContent = usingSample ? "Demo tracker · Sample" : "Demo tracker";
+
+  const weights = all.map(e => e.weight);
+  if (!weights.length) {
+    chart.innerHTML = '<div class="chart-empty">Log a few days to see the weight trend.</div>';
+  } else {
+    const w = 320, h = 72, pad = 8;
+    const mn = Math.min.apply(null, weights), mx = Math.max.apply(null, weights);
+    const span = Math.max(mx - mn, 2);
+    const pts = weights.map((v, i) => {
+      const x = pad + (weights.length === 1 ? (w - 2 * pad) / 2 : i * (w - 2 * pad) / (weights.length - 1));
+      const y = h - pad - (v - mn) / span * (h - 2 * pad);
+      return [x, y];
+    });
+    const d = pts.map((p, i) => (i ? "L" : "M") + p[0].toFixed(1) + " " + p[1].toFixed(1)).join(" ");
+    const dots = pts.map(p => '<circle cx="' + p[0].toFixed(1) + '" cy="' + p[1].toFixed(1) + '" r="2.2" fill="#1c160e" />').join("");
+    chart.innerHTML = '<div class="chart-wrap"><svg viewBox="0 0 ' + w + ' ' + h + '" preserveAspectRatio="none">' +
+      '<line x1="' + pad + '" y1="' + (h-pad) + '" x2="' + (w-pad) + '" y2="' + (h-pad) + '" stroke="#e8e4de" stroke-width="1" />' +
+      '<path d="' + d + '" fill="none" stroke="#1c160e" stroke-width="1.25" />' + dots + '</svg></div>';
+  }
+
+  const steps = all.map(e => e.steps);
+  if (!steps.length) {
+    bars.innerHTML = "";
+  } else {
+    const mx = Math.max.apply(null, steps) || 1;
+    const labels = usingSample ? ["M","T","W","T","F"] : all.map(e => e.date.slice(8));
+    const trackH = 48;
+    bars.innerHTML = '<div class="steps-bars">' + steps.map((v, i) => {
+      const px = Math.max(6, Math.round(trackH * v / mx));
+      return '<div class="col"><div class="track" style="height:' + trackH + 'px"><i style="height:' + px + 'px"></i></div><span>' + (labels[i] || "") + '</span></div>';
+    }).join("") + '</div>';
+  }
+
+  if (list) {
+    if (usingSample) list.textContent = "Sample week shown. Save a check-in to start your log.";
+    else list.innerHTML = all.slice(-5).reverse().map(e =>
+      e.date + " · " + e.weight + " kg · " + e.steps + " steps · train " + e.training + " · protein " + e.protein + " · " + e.sleep + " h"
+    ).join("<br>");
+  }
+}
+
+document.getElementById("app").addEventListener("click", (e) => {
+  const yn = e.target.closest("[data-yn]");
+  if (yn) {
+    formState[yn.getAttribute("data-yn")] = yn.getAttribute("data-val");
+    const group = yn.parentElement;
+    group.querySelectorAll("button").forEach(b => b.classList.toggle("on", b === yn));
+    return;
+  }
+  const tab = e.target.closest("[data-tab]");
+  if (tab) { go(TAB_VIEWS[tab.getAttribute("data-tab")]); return; }
+  const goBtn = e.target.closest("[data-go]");
+  if (goBtn) { go(goBtn.getAttribute("data-go")); return; }
+  const act = e.target.closest("[data-act]");
+  if (!act) return;
+  const a = act.getAttribute("data-act");
+  if (a === "back") {
+    if (TOP_VIEWS.includes(current)) return;
+    go(lastTab);
+  } else if (a === "artifact") {
+    openArtifact();
+  } else if (a === "book") {
+    toast("Booking link to come.");
+  } else if (a === "video") {
+    toast("Welcome video to come.");
+  } else if (a === "share") {
+    toast("Share to come.");
+  } else if (a === "more") {
+    document.getElementById("more-menu").classList.toggle("open");
+  } else if (a === "qa") {
+    const item = act.closest(".qa-item");
+    if (item) item.classList.toggle("open");
+  }
+});
+
+document.getElementById("view-member").addEventListener("click", () => setRole(false));
+document.getElementById("view-admin").addEventListener("click", () => setRole(true));
+document.getElementById("menu-member").addEventListener("click", () => setRole(false));
+document.getElementById("menu-admin").addEventListener("click", () => setRole(true));
+
+go("classroom");
+</script>
+</body>
+</html>
