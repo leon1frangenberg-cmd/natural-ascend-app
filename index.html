@@ -9,12 +9,15 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Natural Ascend" />
 <title>Natural Ascend · Jacked German</title>
+<link rel="stylesheet" href="fonts-outfit.css" />
+<link rel="stylesheet" href="fonts-newsreader.css" />
+<link rel="stylesheet" href="fonts-newsreader-italic.css" />
 <style>
-@font-face { font-family: "Inter"; src: url("fonts/Inter-VariableFont_opsz,wght.ttf") format("truetype"); font-weight: 100 900; font-style: normal; font-display: block; }
-@font-face { font-family: "Outfit"; src: url("fonts/Outfit-VariableFont_wght.ttf") format("truetype"); font-weight: 100 900; font-style: normal; font-display: block; }
 
-@font-face { font-family: "Newsreader"; src: url("fonts/Newsreader-VariableFont_opsz,wght.ttf") format("truetype"); font-weight: 200 800; font-style: normal; font-display: block; }
-@font-face { font-family: "Newsreader"; src: url("fonts/Newsreader-Italic-VariableFont_opsz,wght.ttf") format("truetype"); font-weight: 200 800; font-style: italic; font-display: block; }
+
+
+
+
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html, body {
@@ -132,7 +135,7 @@ body { min-height: 100vh; display: flex; flex-direction: column; align-items: ce
 .header .wm {
   flex: 1;
   height: 36px;
-  background: url("img/wordmark-black-tight.png") left center / contain no-repeat;
+  background: url(var(--img-wordmark-black-tight-png)) left center / contain no-repeat;
   margin-left: 4px;
 }
 
@@ -183,10 +186,10 @@ body { min-height: 100vh; display: flex; flex-direction: column; align-items: ce
   box-shadow: 0 8px 20px rgba(40,36,30,0.10);
 }
 
-.cover.cafe { background-image: url("img/card-start.jpg"); background-position: center; }
-.cover.meal { background-image: url("img/card-tracker.jpg"); background-position: center; }
-.cover.setup { background-image: url("img/card-calls.jpg"); background-position: center; }
-.cover.community { background-image: url("img/card-community.jpg"); background-position: center; }
+.cover.cafe { background-image: url(var(--img-card-start-jpg)); background-position: center; }
+.cover.meal { background-image: url(var(--img-card-tracker-jpg)); background-position: center; }
+.cover.setup { background-image: url(var(--img-card-calls-jpg)); background-position: center; }
+.cover.community { background-image: url(var(--img-card-community-jpg)); background-position: center; }
 
 .cover .scrim {
   position: absolute; inset: 0;
@@ -214,7 +217,7 @@ body { min-height: 100vh; display: flex; flex-direction: column; align-items: ce
   position: absolute;
   right: 10px; top: 10px;
   width: 36px; height: 28px;
-  background: url("img/sprinter-white.png") center / contain no-repeat;
+  background: url(var(--img-sprinter-white-png)) center / contain no-repeat;
   opacity: 0.9;
   filter: drop-shadow(0 1px 4px rgba(0,0,0,0.35));
   z-index: 2;
@@ -829,7 +832,7 @@ body { min-height: 100vh; display: flex; flex-direction: column; align-items: ce
 .hero .sp {
   position: absolute; right: 10px; top: 10px;
   width: 36px; height: 28px;
-  background: url("img/sprinter-white.png") center / contain no-repeat;
+  background: url(var(--img-sprinter-white-png)) center / contain no-repeat;
   opacity: 0.9;
   filter: drop-shadow(0 1px 4px rgba(0,0,0,0.35));
   z-index: 2;
@@ -1111,13 +1114,13 @@ body { min-height: 100vh; display: flex; flex-direction: column; align-items: ce
 .mark {
   width: 56px; height: 56px; flex-shrink: 0; border-radius: 12px;
   background-color: #a5a5a5;
-  background-image: url("img/sprinter-white-on-grey.png");
+  background-image: url(var(--img-sprinter-white-on-grey-png));
   background-position: center; background-size: cover; background-repeat: no-repeat;
 }
 .av.mark {
   width: 28px; height: 28px; border-radius: 50%; color: transparent; box-shadow: none;
   background-color: #a5a5a5;
-  background-image: url("img/sprinter-white-on-grey.png");
+  background-image: url(var(--img-sprinter-white-on-grey-png));
   background-position: center; background-size: cover;
 }
 .member .av.mark { width: 36px; height: 36px; }
@@ -1219,6 +1222,7 @@ body.live .toast { top: 12px; left: 16px; right: 16px; }
   }
 }
 
+body, .tabbar-item, .sb-time { font-family: Outfit, sans-serif; }
 </style>
 </head>
 <body class="live">
@@ -1268,6 +1272,19 @@ body.live .toast { top: 12px; left: 16px; right: 16px; }
     </div>
   </div>
 
+<script src="asset-card-calls.js"></script>
+<script src="asset-card-community.js"></script>
+<script src="asset-card-start.js"></script>
+<script src="asset-card-tracker.js"></script>
+<script src="asset-feed-gym.js"></script>
+<script src="asset-hero-calls.js"></script>
+<script src="asset-hero-qa.js"></script>
+<script src="asset-hero-start.js"></script>
+<script src="asset-hero-tracker.js"></script>
+<script src="asset-sprinter-white-on-grey.js"></script>
+<script src="asset-sprinter-white.js"></script>
+<script src="asset-wordmark-black-tight.js"></script>
+<script src="assets.js"></script>
 <script>
 /* Drop the published Claude artifact URL here. Leave empty until you have it. */
 const ARTIFACT_URL = 'https://claude.ai/artifact/BJ9ZESsuQQekYiDvYs2KCd';
@@ -1275,6 +1292,17 @@ const ARTIFACT_URL = 'https://claude.ai/artifact/BJ9ZESsuQQekYiDvYs2KCd';
 const CLIENT_NAME = 'German';
 
 function jacked() { return 'Jacked ' + CLIENT_NAME; }
+
+(function applyAssets() {
+  if (typeof imgSrc !== 'function') { console.error('assets.js missing'); return; }
+  document.documentElement.style.setProperty('--img-card-calls-jpg', 'url(' + imgSrc('card-calls.jpg') + ')');
+  document.documentElement.style.setProperty('--img-card-community-jpg', 'url(' + imgSrc('card-community.jpg') + ')');
+  document.documentElement.style.setProperty('--img-card-start-jpg', 'url(' + imgSrc('card-start.jpg') + ')');
+  document.documentElement.style.setProperty('--img-card-tracker-jpg', 'url(' + imgSrc('card-tracker.jpg') + ')');
+  document.documentElement.style.setProperty('--img-sprinter-white-on-grey-png', 'url(' + imgSrc('sprinter-white-on-grey.png') + ')');
+  document.documentElement.style.setProperty('--img-sprinter-white-png', 'url(' + imgSrc('sprinter-white.png') + ')');
+  document.documentElement.style.setProperty('--img-wordmark-black-tight-png', 'url(' + imgSrc('wordmark-black-tight.png') + ')');
+})();
 
 const BACK = '<svg width="12" height="20" viewBox="0 0 12 20" fill="none"><path d="M10.5 1.5L2 10l8.5 8.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 const SHARE = '<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 12.5V3.8M10 3.8L7 6.7M10 3.8L13 6.7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M4.2 10.2v5.1A1.7 1.7 0 0 0 5.9 17h8.2a1.7 1.7 0 0 0 1.7-1.7v-5.1" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>';
@@ -1374,11 +1402,11 @@ function tabsBar(view) {
 function cover(file, title, tag, lock, label) {
   const lockHtml = lock ? '<div class="lock-pill">' + LOCK + label + '</div>' : '';
   const extra = (file === 'card-community.jpg') ? ' community' : '';
-  return '<div class="cover' + extra + '" style="background-image:url(\'img/' + file + '\')"><div class="scrim"></div><div class="sp"></div>' +
+  return '<div class="cover' + extra + '" style="background-image:url('' + imgSrc(file) + '')"><div class="scrim"></div><div class="sp"></div>' +
     '<div class="cover-tag">' + tag + '</div><div class="cover-title">' + title + '</div>' + lockHtml + '</div>';
 }
 function hero(file, title, tag) {
-  return '<div class="hero" style="background-image:url(\'img/' + file + '\')"><div class="scrim"></div><div class="sp"></div>' +
+  return '<div class="hero" style="background-image:url('' + imgSrc(file) + '')"><div class="scrim"></div><div class="sp"></div>' +
     '<div class="hero-tag">' + tag + '</div><div class="hero-title">' + title + '</div></div>';
 }
 function prog(lab, pct, locked) {
@@ -1400,7 +1428,7 @@ function day(dow, num, call, today) {
 }
 function post(initials, av, who, kind, body, photo, leon) {
   const avCls = leon ? 'av mark' : 'av ' + av;
-  const pic = photo ? '<div class="post-photo" style="background-image:url(\'img/' + photo + '\')"></div>' : '';
+  const pic = photo ? '<div class="post-photo" style="background-image:url('' + imgSrc(photo) + '')"></div>' : '';
   return '<article class="post"><div class="post-meta"><div class="' + avCls + '">' + (leon ? '' : initials) + '</div>' +
     '<div><div class="post-who">' + who + '</div><div class="post-kind">' + kind + '</div></div>' +
     '<span class="sample">Sample</span></div><p>' + body + '</p>' + pic + '</article>';
