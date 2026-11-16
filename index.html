@@ -1402,11 +1402,11 @@ function tabsBar(view) {
 function cover(file, title, tag, lock, label) {
   const lockHtml = lock ? '<div class="lock-pill">' + LOCK + label + '</div>' : '';
   const extra = (file === 'card-community.jpg') ? ' community' : '';
-  return '<div class="cover' + extra + '" style="background-image:url('' + imgSrc(file) + '')"><div class="scrim"></div><div class="sp"></div>' +
+  return '<div class="cover' + extra + '" style="background-image:url(\'' + imgSrc(file) + '\')"><div class="scrim"></div><div class="sp"></div>' +
     '<div class="cover-tag">' + tag + '</div><div class="cover-title">' + title + '</div>' + lockHtml + '</div>';
 }
 function hero(file, title, tag) {
-  return '<div class="hero" style="background-image:url('' + imgSrc(file) + '')"><div class="scrim"></div><div class="sp"></div>' +
+  return '<div class="hero" style="background-image:url(\'' + imgSrc(file) + '\')"><div class="scrim"></div><div class="sp"></div>' +
     '<div class="hero-tag">' + tag + '</div><div class="hero-title">' + title + '</div></div>';
 }
 function prog(lab, pct, locked) {
@@ -1428,7 +1428,7 @@ function day(dow, num, call, today) {
 }
 function post(initials, av, who, kind, body, photo, leon) {
   const avCls = leon ? 'av mark' : 'av ' + av;
-  const pic = photo ? '<div class="post-photo" style="background-image:url('' + imgSrc(photo) + '')"></div>' : '';
+  const pic = photo ? '<div class="post-photo" style="background-image:url(\'' + imgSrc(photo) + '\')"></div>' : '';
   return '<article class="post"><div class="post-meta"><div class="' + avCls + '">' + (leon ? '' : initials) + '</div>' +
     '<div><div class="post-who">' + who + '</div><div class="post-kind">' + kind + '</div></div>' +
     '<span class="sample">Sample</span></div><p>' + body + '</p>' + pic + '</article>';
